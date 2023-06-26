@@ -6,6 +6,7 @@ const connectionParams={
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }
+
 mongoose.connect(process.env.mongo_uri, connectionParams);
 const connection = mongoose.connection;
 

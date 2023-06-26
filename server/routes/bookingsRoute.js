@@ -1,5 +1,5 @@
 const router=require("express").Router();
-const stripe=require("stripe")("sk_test_51NJCy8SBGyek1w5Y6E9jptne9Nzt57emDDthFBGAGWehOcLi3RpnAIJHfWopqR9tEgQ9s8Xkd58GdVkjgxg3X9MJ000mgcufTM");
+const stripe=require("stripe")(process.env.stripe_key);
 const authMiddleware=require("../middlewares/authMiddleware");
 const Booking = require("../models/bookingModel");
 const Show = require("../models/showModel");
