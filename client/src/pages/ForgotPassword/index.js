@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form, message } from "antd";
 import Button from "../../components/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { LoginUser } from "../../apicalls/users";
+import { ForgotPasswordUser } from "../../apicalls/users";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
-function LOGIN() {
-  const navigate = useNavigate();
+
+function ForgotPassword() {
   const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
-      const response = await LoginUser(values);
+      const response = await ForgotPasswordUser(values);
       if (response.success) {
         message.success(response.message);
-        localStorage.setItem("token", response.data);
-        window.location.href = "/";
+        window.location.href = "/login";
       } else {
         dispatch(HideLoading());
         message.error(response.message);
@@ -25,15 +23,11 @@ function LOGIN() {
       message.error(error.message);
     }
   };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/");
-    }
-  });
+  
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
       <div className="card p-3 w-400">
-        <h1 className="text-xl mb-1 pl-1">TICKETGHAR - LOGIN</h1>
+        <h1 className="text-xl mb-1 pl-1">TICKETGHAR: Forgot Password</h1>
         <hr />
         <Form layout="vertical" className="mt-1" onFinish={onFinish}>
           <Form.Item
@@ -43,19 +37,8 @@ function LOGIN() {
           >
             <input type="email" />
           </Form.Item>
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password" }]}
-          >
-            <input type="password" />
-          </Form.Item>
           <div className="flex flex-col mt-2 ml-1 mr-1 gap-1">
-            <Button fullwidth title="LOGIN" type="submit" />
-            <Link to="/register" className="text-primary">
-              Don't have an account? Register
-            </Link>
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Button fullwidth title="SEND" type="submit" />
           </div>
         </Form>
       </div>
@@ -63,4 +46,4 @@ function LOGIN() {
   );
 }
 
-export default LOGIN;
+export default ForgotPassword;

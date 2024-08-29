@@ -2,29 +2,38 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import './stylesheets/alignments.css';
-import './stylesheets/custom.css';
-import './stylesheets/form-elements.css';
-import './stylesheets/sizes.css';
-import './stylesheets/theme.css';
+import ForgotPassword from "./pages/ForgotPassword"
+import "./stylesheets/alignments.css";
+import "./stylesheets/custom.css";
+import "./stylesheets/form-elements.css";
+import "./stylesheets/sizes.css";
+import "./stylesheets/theme.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Admin from "./pages/Admin";
 import Profile from "./pages/Profile";
-import TheatresForMovie from "./pages/TheatresForMovie"
+import TheatresForMovie from "./pages/TheatresForMovie";
 import BookShow from "./pages/BookShow";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
-  const {loading}=useSelector((state)=>state.loaders);
+  const { loading } = useSelector((state) => state.loaders);
   return (
     <div>
-   {loading&&(
-      <div className="loader-parent">
-      <div className="loader"></div>
-      </div>
-    )}
+      {loading && (
+        <div className="loader-parent">
+          <div className="loader"></div>
+        </div>
+      )}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/movie/:id"
             element={
@@ -41,7 +50,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
@@ -59,6 +68,8 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     </div>

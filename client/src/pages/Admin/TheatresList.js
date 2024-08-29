@@ -38,6 +38,7 @@ const getData = async () => {
       }else{
         message.error(response.message);
       }
+      dispatch(HideLoading());
     } catch (error) {
       dispatch(HideLoading());
       message.error(error.message);
@@ -65,7 +66,7 @@ const getData = async () => {
         title: "Owner",
         dataIndex: "owner",
         render: (text, record) => {
-          return record.owner.name;
+          return record.name;
         }
     },
     {
