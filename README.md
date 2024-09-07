@@ -1,9 +1,9 @@
-# TicketGhar  | [Live Project](https://ticket-ghar-mern.netlify.app/)
+# TicketGhar  | [Live Project](https://mern-ticket-ghar.netlify.app/)
 
 ## Introduction
 ### Following features are added in this project:
 + Fully responsive site
-+ User can register/login
++ User can register/login and also reset their password if forgotten
 + Movies can be searched by its name
 + Online ticket can be booked by making online payment 
 + Interested user can also get their theatre added by getting approval by Admin
@@ -22,10 +22,21 @@
 + [Himanshu Kumar](https://github.com/agarwalhimanshugaya)
 ## Setup
 1. Clone the project in your system and head to the directory where you saved the project.
-2. Install "node modules" in root as well as client directory by running "npm install" in the corresponding location path.
-3. Add your mongo_uri, jwt_secret and stripe_key token in an .env file in root directory.
+2. Install "node modules" in server as well as client directory by running "npm install" in the corresponding location path.
+3. Add your mongo_uri, jwt_secret, stripe_key, adminUsername, adminPassword token in an .env file in server directory.
 4. start the server by running "nodemon server" commmand in server directory.
 5. start the client side by running "npm start" command in client directory.
+
+**.env file structure**
+
+**Note:** adminUsername and adminPassword is used to send the mail in case of forgot password to reset the password and one can find the adminPassword from the adminUserName gmail account from App Password feature of Gmail.
+```
+mongo_uri = ""
+jwt_secret = ""
+stripe_key = ""
+adminUsername = ""
+adminPassword = ""
+```
 
 #### ScreenShot 
 ![1](https://github.com/devprakashdp2021/Ticket-Ghar/assets/97429564/215d1735-3a04-4fd8-970c-c559a984d219)
