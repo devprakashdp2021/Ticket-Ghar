@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function PageTitle({title}) {
   return (
@@ -8,4 +8,4 @@ function PageTitle({title}) {
   )
 }
 
-export default PageTitle
+export default PageTitle;

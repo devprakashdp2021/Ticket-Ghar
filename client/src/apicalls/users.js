@@ -27,6 +27,16 @@ export const LoginUser = async (payload) => {
   }
 };
 
+//login user using google
+export const LoginUserUsingGoogle = async (payload) => {
+  try {
+    const response = await axios.post("/users/google-login", payload, config);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 //get current user
 export const GetCurrentUser = async () => {
   try {

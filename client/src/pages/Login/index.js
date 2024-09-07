@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { Form, message } from "antd";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginUser } from "../../apicalls/users";
+import { LoginUser, LoginUserUsingGoogle } from "../../apicalls/users";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
+import { GoogleLogin } from "@react-oauth/google";
+
 function LOGIN() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,6 +27,26 @@ function LOGIN() {
       message.error(error.message);
     }
   };
+
+  // Google login success handler
+  const handleGoogleSuccess = async (values) => {
+    try {
+      dispatch(ShowLoading());
+      const response = await LoginUserUsingGoogle(values);
+      if (response.success) {
+        message.success(response.message);
+        localStorage.setItem("token", response.data);
+        window.location.href = "/";
+      } else {
+        message.error(response.message);
+      }
+      dispatch(HideLoading());
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error("Google login failed");
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
@@ -52,6 +74,12 @@ function LOGIN() {
           </Form.Item>
           <div className="flex flex-col mt-2 ml-1 mr-1 gap-1">
             <Button fullwidth title="LOGIN" type="submit" />
+
+            <GoogleLogin fullwidth
+              onSuccess={handleGoogleSuccess}
+              onError={() => message.error("Google login failed")}
+            />
+
             <Link to="/register" className="text-primary">
               Don't have an account? Register
             </Link>

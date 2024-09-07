@@ -3,7 +3,6 @@ import PageTitle from "../../components/PageTitle";
 import { Tabs } from "antd";
 import MoviesList from "./MoviesList";
 import TheatresList from "./TheatresList";
-// import TheatresList from "./TheatresList";
 
 function Admin() {
   return (
@@ -12,11 +11,11 @@ function Admin() {
 
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="Movies" key="1">
-            <MoviesList/>
+          <MoviesList />
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="Theatres" key="2">
-            <TheatresList />
+          <TheatresList />
         </Tabs.TabPane>
       </Tabs>
     </div>

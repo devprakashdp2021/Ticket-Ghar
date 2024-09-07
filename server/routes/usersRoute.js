@@ -4,6 +4,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("../middlewares/authMiddleware");
 const nodemailer = require("nodemailer");
+const { OAuth2Client } = require("google-auth-library");
+
+
+// Initialize Google OAuth2 client with your Google Client ID
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 //register a new user
 router.post("/register", async (req, res) => {
@@ -77,6 +82,63 @@ router.post("/login", async (req, res) => {
     res.send({
       success: false,
       message: error.message,
+    });
+  }
+});
+
+// Google Login API
+router.post("/google-login", async (req, res) => {
+  const { credential } = req.body; 
+
+  if (!credential) {
+    return res.status(400).send({
+      success: false,
+      message: "Token ID is required",
+    });
+  }
+
+  try {
+    // Verify the Google credential (idToken)
+    const ticket = await client.verifyIdToken({
+      idToken: credential, // Using credential here as the idToken
+      audience: process.env.GOOGLE_CLIENT_ID, // Ensure this matches your Google Client ID
+    });
+
+    const { email, name } = ticket.getPayload(); // Get user info from token
+
+    // Check if user already exists in the database
+    let user = await User.findOne({ email });
+    if (!user) {
+      // If the user doesn't exist, create a new one
+      const salt = await bcrypt.genSalt(10);
+      const password = await bcrypt.hash(email + process.env.jwt_secret, salt); // Creating a password based on email
+
+      user = new User({
+        name,
+        email,
+        password,
+        isGoogleUser: true, // A flag to track Google-authenticated users
+      });
+
+      await user.save(); // Save new user to the database
+    }
+
+    // Generate a JWT token for the user
+    const token = jwt.sign({ userId: user._id }, process.env.jwt_secret, {
+      expiresIn: "1d",
+    });
+
+    // Send success response with the token
+    res.send({
+      success: true,
+      message: "User logged in successfully via Google",
+      data: token,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.send({
+      success: false,
+      message: "Google Login failed: " + error.message,
     });
   }
 });

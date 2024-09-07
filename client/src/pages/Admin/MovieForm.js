@@ -63,8 +63,11 @@ function MovieForm({
       <Form layout="vertical" onFinish={onFinish} initialValues={selectedMovie}>
         <Row gutter={16}>
           <Col span={24}>
-            <Form.Item label="Movie Name" name="title" 
-            rules={[{required: true, message: "Please input Movie name!"}]}>
+            <Form.Item
+              label="Movie Name"
+              name="title"
+              rules={[{ required: true, message: "Please input Movie name!" }]}
+            >
               <input type="text" />
             </Form.Item>
           </Col>

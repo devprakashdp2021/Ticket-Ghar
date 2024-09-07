@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword"
+import ForgotPassword from "./pages/ForgotPassword";
 import "./stylesheets/alignments.css";
 import "./stylesheets/custom.css";
 import "./stylesheets/form-elements.css";
@@ -15,6 +15,8 @@ import Profile from "./pages/Profile";
 import TheatresForMovie from "./pages/TheatresForMovie";
 import BookShow from "./pages/BookShow";
 import ResetPassword from "./pages/ResetPassword";
+
+
 function App() {
   const { loading } = useSelector((state) => state.loaders);
   return (
@@ -69,7 +71,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
