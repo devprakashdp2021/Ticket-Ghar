@@ -4,6 +4,7 @@
 ### Following features are added in this project:
 + Fully responsive site
 + User can register/login and also reset their password if forgotten
++ User can also login using their google account
 + Movies can be searched by its name
 + Online ticket can be booked by making online payment 
 + Interested user can also get their theatre added by getting approval by Admin
@@ -23,9 +24,10 @@
 ## Setup
 1. Clone the project in your system and head to the directory where you saved the project.
 2. Install "node modules" in server as well as client directory by running "npm install" in the corresponding location path.
-3. Add your mongo_uri, jwt_secret, stripe_key, adminUsername, adminPassword token in an .env file in server directory.
-4. start the server by running "nodemon server" commmand in server directory.
-5. start the client side by running "npm start" command in client directory.
+3. Add your mongo_uri, jwt_secret, stripe_key, adminUsername, adminPassword, GOOGLE_CLIENT_ID token in an .env file in server directory.
+4. Also add GOOGLE_CLIENT_ID token in an .env file in client directory.
+5. start the server by running "nodemon server" commmand in server directory.
+6. start the client side by running "npm start" command in client directory.
 
 **.env file structure**
 
@@ -36,6 +38,7 @@ jwt_secret = ""
 stripe_key = ""
 adminUsername = ""
 adminPassword = ""
+GOOGLE_CLIENT_ID = ""
 ```
 
 #### ScreenShot 
