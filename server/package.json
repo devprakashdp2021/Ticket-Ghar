@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
