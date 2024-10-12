@@ -1,4 +1,4 @@
-# TicketGhar  | [Live Project](https://mern-ticket-ghar.netlify.app/)
+# TicketGhar  | [Live Project](https://ticket-ghar.netlify.app/)
 
 ## Introduction
 ### Following features are added in this project:
