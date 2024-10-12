@@ -89,21 +89,21 @@ router.post("/login", async (req, res) => {
 // Google Login API
 router.post("/google-login", async (req, res) => {
   const { credential } = req.body; 
-  console.log("1", credential);
+  
   if (!credential) {
     return res.status(400).send({
       success: false,
       message: "Token ID is required",
     });
   }
-  console.log("2", credential);
+  
   try {
     // Verify the Google credential (idToken)
     const ticket = await client.verifyIdToken({
       idToken: credential, // Using credential here as the idToken
       audience: process.env.GOOGLE_CLIENT_ID, // Ensure this matches your Google Client ID
     });
-    console.log("3 verification complete");
+    
     const { email, name } = ticket.getPayload(); // Get user info from token
 
     // Check if user already exists in the database
