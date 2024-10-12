@@ -189,7 +189,7 @@ router.post("/forgot-password", async (req, res) => {
       from: process.env.adminUsername,
       to: req.body.email,
       subject: "Reset your Password",
-      text: `http://localhost:3000/reset-password/${user._id}/${token}`,
+      text: `https://ticket-ghar.netlify.app/reset-password/${user._id}/${token}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
